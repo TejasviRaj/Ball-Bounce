@@ -26,14 +26,14 @@ extern SDL_Event event;
 
 //class line;
 void init();
-void point(float x, float y, Color color=WHITE, float b=1,string rotate="FALSE",float angle=0,float xc=0,float yc=0);//void HGL_init(int argc, char **argv);
+void point(float x, float y, Color color=WHITE);//void HGL_init(int argc, char **argv);
 //void HGL_End(void (*func)(void));
 void clear(Color color=NONE);
 void HGL_run(int argc, char **argv,void (*func)(void (*)()));
 float area(float x1,float y1,float x2,float y2,float x3,float y3);
 float sdl_mousey();
 float sdl_mousex();
-void line(float x1,float y1,float x2,float y2, Color color=WHITE,string str="Draw");
+void line(float x1,float y1,float x2,float y2, Color color=WHITE);
 
 
 //void OPENGL_init();

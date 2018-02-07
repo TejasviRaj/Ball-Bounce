@@ -64,6 +64,7 @@ circle circle::move(float xt,float yt,int time,string str)
   return *this;
 }
 
+
   bool circle::inside(int x,int y)
   {
     float d= sqrt((x-xc)*(x-xc)+(y-yc)*(y-yc));

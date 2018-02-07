@@ -11,4 +11,4 @@ const Color BLUE(0, 0, 255);
 const Color YELLOW(0, 255, 255);
 const Color BLACK(0,0,0);
 
-const Color NONE= BLACK;
+const Color NONE= RED;

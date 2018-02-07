@@ -9,13 +9,7 @@ int main(int argc, char **argv) {
 void display(void (*eventhandle)(void))
 {
 
-//  rectangle r(200,200,50,100);
-//  r.rotate(135).scale(2,3);
-/*line l(450,50,550,200);
-line l1(0,0,1926,0);
-l1.rotate(45,"Draw",0,0);
-l.reflect(45);*/
-//triangle c(0,100,100,100,50,50);
+
 line(0,FLOOR_HEIGHT-1,WINDOW_WIDTH,FLOOR_HEIGHT-1);
 circle c(200,500,50);
 while(1)

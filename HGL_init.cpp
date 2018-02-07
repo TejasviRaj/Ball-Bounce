@@ -38,7 +38,7 @@ void HGL_run(int argc, char **argv,void (*func)(void (*func1)()))
   	SDL_close();
 }
 
-void point(float x, float y, Color color, float b,string rotate,float angle,float xc,float yc) {
+void point(float x, float y, Color color) {
 /*	glBegin(GL_POINTS);
   glColor3f(color.r*b, color.g*b, color.b*b);
   angle=(PI/180)*angle;
@@ -61,12 +61,11 @@ void SDL_initialize()
 
     SDL_Init(SDL_INIT_VIDEO);
   //  SDL_CreateWindowAndRenderer(WINDOW_WIDTH, WINDOW_HEIGHT, 0, &window, &renderer);
-    window = SDL_CreateWindow("SDL2 Keyboard/Mouse events",
+    window = SDL_CreateWindow("Ball bounce",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, 0);
         renderer = SDL_CreateRenderer(window, -1, 0);
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    SDL_SetRenderDrawColor(renderer, NONE.r*255, NONE.g*255, NONE.b*255, 0);
     SDL_RenderClear(renderer);
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_SetWindowFullscreen(window,0);
     fullscreen_flag=0;
 	}
@@ -111,10 +110,9 @@ void event_handler()
   }
 }
 
-void line(float x1,float y1,float x2,float y2,Color color,string str)
+void line(float x1,float y1,float x2,float y2,Color color)
 {
-  if (str=="nodraw")
-  return;
+
   float dx=x2-x1;
   float dy=y2-y1;
   float steps,xinr,yinr;
