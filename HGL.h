@@ -48,12 +48,12 @@ class circle
     circle(float xc,float yc,float r, Color color=WHITE,string str="Draw");
     void draw();
     circle translate(float xt,float yt,string str="Draw");
-    circle move(float xt,float yt,int time=20,string str="Draw");
+    circle move(float xt,float yt,float time=20,string str="Draw");
     circle scale(float s,string str="Draw");
     circle remove();
     bool inside(int x,int y);
-    circle fall(int fallspeed);
-    circle rise(int risespeed);
+    circle fall(float fallspeed);
+    circle rise(float risespeed,int maxheight);
 };
 
 #endif

@@ -12,6 +12,7 @@ void display(void (*eventhandle)(void))
 
 line(0,FLOOR_HEIGHT-1,WINDOW_WIDTH,FLOOR_HEIGHT-1);
 circle c(200,500,50);
+int count=0;
 while(1)
 {
   if (SDL_PollEvent(&event))
@@ -67,10 +68,10 @@ while(1)
         break;*/
 
    }
-
-      else
+      else if (count==0)
         {
-            c.fall(1);
+            c.fall(2.0);
+            count++;
         }
 
   }
