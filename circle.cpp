@@ -1,11 +1,13 @@
 #define direct 0
 #define formula 1
+#define totaldelete 0
+#define fewpixel 1
 
 extern "C"
 #include <cmath>
 #include "HGL.h"
 #define FALL_FUNC 0
-
+#define remove_flag 0
 
 circle::circle(float xc,float yc,float r,Color color,string str):xc(xc),yc(yc),r(r),color(color)
 {
@@ -20,14 +22,18 @@ void circle::draw()
   float p=1-r;
   while (x<=y)
   {
-    point(x+xc,y+yc,color);
-    point(-x+xc,-y+yc,color);
-    point(-x+xc,y+yc,color);
-    point(x+xc,-y+yc,color);
-    point(y+xc,x+yc,color);
-    point(-y+xc,-x+yc,color);
-    point(-y+xc,x+yc,color);
-    point(y+xc,-x+yc,color);
+    for (int i=-x;i<=+x;i++)
+    {
+      point(i+xc,y+yc,color);
+      point(i+xc,-y+yc,color);
+    }
+
+    for (int i=-y;i<=+y;i++)
+    {
+      point(i+xc,x+yc,color);
+      point(i+xc,-x+yc,color);
+    }
+
     x++;
     if (p<0)
     p+=2*x+1;
@@ -37,6 +43,7 @@ void circle::draw()
       p+=2*x+1-2*y;
     }
   }
+  if (color.r != NONE.r || color.g != NONE.g || color.b != NONE.b)
   SDL_RenderPresent(renderer);
 
 }
@@ -55,15 +62,60 @@ circle circle::scale(float s,string str)
 
 }
 
+#if remove_flag== totaldelete
 circle circle::remove()
 {
   return circle(xc,yc,r,NONE);
 }
 
+#elif remove_flag == fewpixel
+circle circle::remove()
+{
+  float x=0, y=r;
+  float p=1-r;
+  for (int k=1;k<=10;k++)
+  {
+    for (int i=0;i<=WINDOW_WIDTH;i++)
+    {
+      point(i,y+yc,NONE);
+    }
+    x++;
+    if (p<0)
+    p+=2*x+1;
+    else
+    {
+      y-=1;
+      p+=2*x+1-2*y;
+    }
+  }
+
+  SDL_RenderPresent(renderer);
+  //while(1) {}
+
+}
+
+#else
+#error "remove flag wrong"
+
+
+#endif
+
 circle circle::move(float xt,float yt,float time,string str)
 {
 //  remove();
-  remove();
+ remove();
+
+// for (int i=0;i<=FLOOR_HEIGHT-1;i++)
+// line(0,i,WINDOW_WIDTH,i);
+
+// for (int i=0;i<=FLOOR_HEIGHT-1;i++)
+// {
+//   SDL_SetRenderDrawColor(renderer, WHITE.r*255, WHITE.g*255, WHITE.b*255, 0);
+//   SDL_RenderDrawLine(renderer,0,WINDOW_HEIGHT-i,WINDOW_WIDTH,WINDOW_HEIGHT-i);
+//
+// }
+
+
   *this=translate(xt,yt,str);
   SDL_Delay(time);
   return *this;

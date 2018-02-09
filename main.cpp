@@ -8,10 +8,10 @@ int main(int argc, char **argv) {
 
 void display(void (*eventhandle)(void))
 {
+for (int i=0;i<=FLOOR_HEIGHT-1;i++)
+line(0,i,WINDOW_WIDTH,i);
 
-
-line(0,FLOOR_HEIGHT-1,WINDOW_WIDTH,FLOOR_HEIGHT-1);
-circle c(200,500,50);
+circle c(200,500,50,RED);
 int count=0;
 while(1)
 {

@@ -118,42 +118,16 @@ void line(float x1,float y1,float x2,float y2,Color color)
   float steps,xinr,yinr;
   float x=x1;
   float y=y1;
-  if (dx==0)
-  {
-    steps=fabs(dy);
-    yinr=dy/steps;
-    for (size_t i = 0; i < steps; i++)
-      {
-        point (x,y,color);
-        y+=yinr;
-      }
-  }
-  else if (dy==0)
-  {
+
     steps=fabs(dx);
     xinr=dx/steps;
     for (size_t i = 0; i < steps; i++)
       {
-        point (x,y,color);
+        point (x,y,BLACK);
+
         x+=xinr;
       }
-  }
-  else
-  {
-    if (fabs(dx)>fabs(dy))
-        steps=fabs(dx);
-      else
-        steps=fabs(dy);
 
-      xinr=dx/steps;
-      yinr=dy/steps;
+    //  SDL_RenderPresent(renderer);
 
-      for (size_t i = 0; i < steps; i++)
-        {
-          point (x,y,color);
-          x=x+xinr;
-          y=y+yinr;
-        }
-  }
-  SDL_RenderPresent(renderer);
 }
