@@ -9,6 +9,8 @@ extern "C"
 #define FALL_FUNC 0
 #define remove_flag 0
 
+int visit=0;
+
 circle::circle(float xc,float yc,float r,Color color,string str):xc(xc),yc(yc),r(r),color(color)
 {
   if (str=="nodraw")
@@ -47,7 +49,7 @@ void circle::phong(int x,int y)
   fact+=0.01;
   if (fact>1) fact=1;
   //if (fact <0.3) fact+=0.1;
-  if (fact==1) 
+  if (fact==1)
   {
     //fact=1;
     point (x,y,WHITE,fact);
@@ -237,27 +239,42 @@ circle circle::move(float xt,float yt,float time,string str)
 
         do
           {
+            if (SDL_PollEvent(&event))
+            event_handler();
               move(0,-1,count); //fallspeed v/sec
           }
               while (yc-r>FLOOR_HEIGHT);
         count-=2;
         if (count==0)
-            return *this;
+        {
+          count=10;
+          return *this;
+        }
         else
             rise(risespeed,x);
   }
 
   circle circle::rise(float risespeed,int maxheight)
   {
-    static int count=9;
+    static int count =9;
     static int height=maxheight-100;
+    if (visit==0)
+    {
+      count=9;
+     height=maxheight-100;
+    }
+    visit=1;
       do
         {
+          if (SDL_PollEvent(&event))
+          event_handler();
+
             move(0,1,count); //fallspeed v/sec
         }
             while (yc<height);
             height-=100;
       count-=2;
+
           fall(risespeed);
   }
 

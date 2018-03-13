@@ -22,6 +22,8 @@ extern SDL_Event event;
  extern SDL_Window *window;
  extern const int WINDOW_WIDTH ;
  extern const int WINDOW_HEIGHT ;
+ extern int fullscreen_flag;
+ extern int visit;
 
 
 //class line;
@@ -34,6 +36,9 @@ float area(float x1,float y1,float x2,float y2,float x3,float y3);
 float sdl_mousey();
 float sdl_mousex();
 void line(float x1,float y1,float x2,float y2, Color color=WHITE);
+void SDL_close();
+void event_handler();
+
 
 
 //void OPENGL_init();

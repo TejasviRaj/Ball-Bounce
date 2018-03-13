@@ -12,8 +12,6 @@ SDL_Event event;
 void OPENGL_INIT(int argc,char **argv);
 void OPENGL_end();
 void SDL_initialize();
-void SDL_close();
-void event_handler();
 
 float sdl_mousey()
 {
