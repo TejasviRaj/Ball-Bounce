@@ -38,7 +38,7 @@ void HGL_run(int argc, char **argv,void (*func)(void (*func1)()))
   	SDL_close();
 }
 
-void point(float x, float y, Color color) {
+void point(float x, float y, Color color,float b) {
 /*	glBegin(GL_POINTS);
   glColor3f(color.r*b, color.g*b, color.b*b);
   angle=(PI/180)*angle;
@@ -49,7 +49,7 @@ void point(float x, float y, Color color) {
   }
 	glVertex2f(x, y);
 	glEnd(); */
-  SDL_SetRenderDrawColor(renderer, color.r*255, color.g*255, color.b*255, 255);
+  SDL_SetRenderDrawColor(renderer, color.r*255*b, color.g*255*b, color.b*255*b, 255);
   SDL_RenderDrawPoint(renderer, x,WINDOW_HEIGHT-y);
   //  SDL_RenderDrawPoint(renderer, x,y);
 

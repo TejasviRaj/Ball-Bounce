@@ -16,6 +16,50 @@ circle::circle(float xc,float yc,float r,Color color,string str):xc(xc),yc(yc),r
   draw();
 }
 
+void circle::phong(int x,int y)
+{
+  int x1=200,y1=200,z1=300; // light source
+  int z = sqrt (r*r-(x-xc)*(x-xc)-(y-yc)*(y-yc));
+  float xn= x-xc;
+  float yn= y-yc;
+  float zn= z;
+
+  float xl= x1-x;
+  float yl= y1-y;
+  float zl= z1-z;
+
+  float xnn=xn/sqrt(xn*xn+yn*yn+zn*zn);
+  float ynn=yn/sqrt(xn*xn+yn*yn+zn*zn);
+  float znn=zn/sqrt(xn*xn+yn*yn+zn*zn);
+
+  float xll=xl/sqrt(xl*xl+yl*yl+zl*zl);
+  float yll=yl/sqrt(xl*xl+yl*yl+zl*zl);
+  float zll=zl/sqrt(xl*xl+yl*yl+zl*zl);
+
+  float fact= xnn*xll+ynn*yll+zll*znn;
+
+  // if (fact>0.98)
+  // {
+  //   (x,y,WHITE,1) ;
+  //   return;
+  // }
+  if (fact <0) fact=0;
+  fact+=0.01;
+  if (fact>1) fact=1;
+  //if (fact <0.3) fact+=0.1;
+  if (fact==1) 
+  {
+    //fact=1;
+    point (x,y,WHITE,fact);
+      return;
+  }
+  point (x,y,color,fact);
+
+
+
+
+}
+
 void circle::draw()
 {
   float x=0, y=r;
@@ -24,14 +68,14 @@ void circle::draw()
   {
     for (int i=-x;i<=+x;i++)
     {
-      point(i+xc,y+yc,color);
-      point(i+xc,-y+yc,color);
+      phong(i+xc,y+yc);
+      phong(i+xc,-y+yc);
     }
 
     for (int i=-y;i<=+y;i++)
     {
-      point(i+xc,x+yc,color);
-      point(i+xc,-x+yc,color);
+      phong(i+xc,x+yc);
+      phong(i+xc,-x+yc);
     }
 
     x++;
@@ -65,7 +109,13 @@ circle circle::scale(float s,string str)
 #if remove_flag== totaldelete
 circle circle::remove()
 {
-  return circle(xc,yc,r,NONE);
+ // return circle(xc,yc,r,NONE);
+
+     SDL_SetRenderDrawColor(renderer, NONE.r*255, NONE.g*255, NONE.b*255, 0);
+     SDL_RenderClear(renderer);
+
+     for (int i=0;i<=FLOOR_HEIGHT-1;i++)
+line(0,i,WINDOW_WIDTH,i);
 }
 
 #elif remove_flag == fewpixel
